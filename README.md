@@ -1,36 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
-    <OutputType>Library</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
     <OutputPath>Binaries</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <IsPackable>false</IsPackable>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- FIXED: Use explicit versions that work together -->
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.1.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
     <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+    <PackageReference Include="coverlet.collector" Version="6.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MyApp\MyApp.csproj" />
   </ItemGroup>
+</Project>
 
-  <!-- FIXED: Copy ALL dependencies to output -->
-  <Target Name="CopyAllDependencies" AfterTargets="Build">
-    <ItemGroup>
-      <AllDependencies Include="@(ReferenceCopyLocalPaths)" />
-    </ItemGroup>
-    <Copy SourceFiles="@(AllDependencies)" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="true" />
-  </Target>
-
+------------------
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputPath>Binaries</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
 </Project>
